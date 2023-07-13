@@ -1,0 +1,24 @@
+﻿@page
+@model SportZone.Pages.Products.CatalogModel
+
+<div class="container p-3">
+	<div class="row pt-4">
+		<div class="col-12">
+			<h2 class="text-primary">Product List</h2>
+		</div>
+
+		<br /><br />
+
+		@foreach (var obj in Model.Products)
+		{
+			<div class="card" style="width: 18rem;">
+				<img src="@obj.ImageUrl" class="card-img-top" alt="Cant Load Image">
+				<div class="card-body">
+					<h5 class="card-title">@obj.Name</h5>
+					<p class="card-text">@obj.Description</p>
+					<a href="#" class="btn btn-primary">Open product</a>
+				</div>
+			</div>
+		}
+	</div>
+</div>

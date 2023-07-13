@@ -20,7 +20,7 @@ namespace SportZone___RazorPages_sport_shop.Migrations
                     Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     Description = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: true),
                     ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CategoryName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    Category = table.Column<int>(type: "int", nullable: false),
                     Price = table.Column<float>(type: "real", nullable: false),
                     IsAvaliable = table.Column<bool>(type: "bit", nullable: false),
                     Size = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true),

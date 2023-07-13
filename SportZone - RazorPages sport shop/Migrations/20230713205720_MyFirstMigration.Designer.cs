@@ -12,7 +12,7 @@ using SportZone.Data;
 namespace SportZone___RazorPages_sport_shop.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230712165534_MyFirstMigration")]
+    [Migration("20230713205720_MyFirstMigration")]
     partial class MyFirstMigration
     {
         /// <inheritdoc />
@@ -41,9 +41,8 @@ namespace SportZone___RazorPages_sport_shop.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<string>("CategoryName")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                    b.Property<int>("Category")
+                        .HasColumnType("int");
 
                     b.Property<DateTime?>("CreationDate")
                         .HasColumnType("datetime2");
