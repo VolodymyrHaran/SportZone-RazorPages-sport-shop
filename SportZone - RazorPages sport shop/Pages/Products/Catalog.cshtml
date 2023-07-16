@@ -20,7 +20,10 @@
 			<label for="maxPrice">Max Price:</label>
 			<input type="number" id="maxPrice" name="maxPrice">
 
-			<button type="submit">Filter</button>
+			<label for="searchName">Search:</label>
+			<input type="text" id="searchName" name="searchName">
+
+			<button class="btn btn-primary" type="submit">Filter</button>
 		</form>
 		
 		<div class="col-12">
@@ -33,7 +36,7 @@
 				<div class="card-body">
 					<h5 class="card-title">@product.Name</h5>
 					<p class="card-text">@product.Description</p>
-					<a href="#" class="btn btn-primary">Open product</a>
+					<a asp-page="DetailedPage" asp-route-id="@product.Id" class="btn btn-primary">Open product</a>
 				</div>
 			</div>
 		}

@@ -1,4 +1,3 @@
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using SportZone.Data;
@@ -17,9 +16,9 @@ namespace SportZone.Pages.Products
 
 		public IList<Product> Products { get; set; } = default!;
 
-		public async Task OnGetAsync(string category, float? minPrice, float? maxPrice)
+		public async Task OnGetAsync(string category, float? minPrice, float? maxPrice, string searchName)
 		{
-			if (string.IsNullOrEmpty(category) && !minPrice.HasValue && !maxPrice.HasValue)
+			if (string.IsNullOrEmpty(category) && !minPrice.HasValue && !maxPrice.HasValue && string.IsNullOrEmpty(searchName))
 			{
 				if (_context.Products != null)
 				{
@@ -31,31 +30,21 @@ namespace SportZone.Pages.Products
 			{
 				if (!minPrice.HasValue) minPrice = 0;
 				if (!maxPrice.HasValue) maxPrice = 10000;
-				Products = await GetFilteredProducts(category, minPrice.Value, maxPrice.Value);
+				Products = await GetFilteredProducts(category, minPrice.Value, maxPrice.Value, searchName);
 			}
 		}
 
-		private Task<List<Product>> GetFilteredProducts(string category, float? minPrice, float? maxPrice)
+		private Task<List<Product>> GetFilteredProducts(string category, float? minPrice, float? maxPrice, string searchName)
 		{
-			if (category.Equals("All"))
-			{
-				return _context.Products
-				.Where(p => p.Price >= minPrice && p.Price <= maxPrice)
-				.ToListAsync();
-			}
+			var filtered = _context.Products.Where(p => p.Price >= minPrice && p.Price <= maxPrice);
+			if (!string.IsNullOrEmpty(searchName)) filtered = filtered.Where(p => p.Name.ToUpper().Contains(searchName.ToUpper()));
+			if (category.Equals("All")) return filtered.ToListAsync();
+
 			Categories result;
-			if (Enum.TryParse(category, out result))
-			{
-				return _context.Products
-				.Where(p => p.Category.Equals(result) && p.Price >= minPrice && p.Price <= maxPrice)
+			Enum.TryParse(category, out result);
+			return filtered
+				.Where(p => p.Category.Equals(result))
 				.ToListAsync();
-			}
-			else
-			{
-				return _context.Products
-				.Where(p => p.Category.Equals(result) && p.Price >= minPrice && p.Price <= maxPrice)
-				.ToListAsync();
-			}
 
 		}
 	}

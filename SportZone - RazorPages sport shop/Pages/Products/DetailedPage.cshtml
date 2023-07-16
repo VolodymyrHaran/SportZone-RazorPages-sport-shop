@@ -1,0 +1,74 @@
+﻿@page
+@model SportZone.Pages.Products.DetailedPageModel
+<h1>@Model.Product.Name</h1>
+
+<h4>Info</h4>
+<hr />
+<form method="post" class="row">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="form-group col-md-6">
+        <label asp-for="Product.Name" class="control-label"></label>
+        <input asp-for="Product.Name" class="form-control input-bg-color" />
+        <span asp-validation-for="Product.Name" class="text-danger"></span>
+    </div>
+    <div class="form-group col-md-6">
+        <label asp-for="Product.Description" class="control-label"></label>
+        <input asp-for="Product.Description" class="form-control input-bg-color" />
+        <span asp-validation-for="Product.Description" class="text-danger"></span>
+    </div>
+    <div class="form-group col-md-6">
+        <label asp-for="Product.ImageUrl" class="control-label"></label>
+        <input asp-for="Product.ImageUrl" class="form-control input-bg-color" />
+        <span asp-validation-for="Product.ImageUrl" class="text-danger"></span>
+    </div>
+    <div class="form-group col-md-6">
+        <label asp-for="Product.Category" class="control-label"></label>
+        <select asp-for="Product.Category" class="form-control input-bg-color">
+            <option selected>Select Category</option>
+            @foreach (var obj in Enum.GetValues(typeof(Categories)))
+            {
+                <option value="@obj.ToString()">@obj.ToString()</option>
+            }
+        </select>
+        <span asp-validation-for="Product.Category" class="text-danger"></span>
+    </div>
+    <div class="form-group col-md-6">
+        <label asp-for="Product.Price" class="control-label"></label>
+        <input asp-for="Product.Price" class="form-control input-bg-color" />
+        <span asp-validation-for="Product.Price" class="text-danger"></span>
+    </div>
+
+    <div class="form-group col-md-6">
+        <label asp-for="Product.Size" class="control-label"></label>
+        <input asp-for="Product.Size" class="form-control input-bg-color" />
+        <span asp-validation-for="Product.Size" class="text-danger"></span>
+    </div>
+    <div class="form-group col-md-6">
+        <label asp-for="Product.Brand" class="control-label"></label>
+        <input asp-for="Product.Brand" class="form-control input-bg-color" />
+        <span asp-validation-for="Product.Brand" class="text-danger"></span>
+    </div>
+    <div class="form-group col-md-6">
+        <label asp-for="Product.AdditionalParameters" class="control-label"></label>
+        <input asp-for="Product.AdditionalParameters" class="form-control input-bg-color" />
+        <span asp-validation-for="Product.AdditionalParameters" class="text-danger"></span>
+    </div>
+    <div class="form-group form-check col-md-9 align-self-center">
+        <label class="form-check-label ps-3">
+            <input class="form-check-input " asp-for="Product.IsAvaliable" /> @Html.DisplayNameFor(model => model.Product.IsAvaliable)
+        </label>
+    </div>
+    <div class="form-group col-1 mt-2">
+        <input type="submit" value="Create" class="btn btn-primary " />
+    </div>
+    <div class="form-group col-2 mt-2">
+        <a class="btn btn-primary" asp-page="Index">Back to List</a>
+    </div>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
